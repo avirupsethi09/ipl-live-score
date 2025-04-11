@@ -1,32 +1,61 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stump Mic - Live IPL Score</title>
+    <title>Stump Mic Live IPL Score</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #101820;
-            color: #ffffff;
             text-align: center;
-            padding: 20px;
+            background-color: #282c34;
+            color: white;
         }
-        h1 {
-            color: #f2aa4c;
-        }
-        iframe {
+        #scoreboard {
             margin-top: 20px;
-            border: none;
-            width: 90%;
-            height: 600px;
+        }
+        .team {
+            font-size: 24px;
+            margin: 10px;
+        }
+        .score {
+            font-size: 40px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>🏏 Stump Mic - Live IPL Scoreboard</h1>
-    <p>Stay updated with real-time IPL scores, powered by ESPNCricinfo.</p>
-    <iframe src="https://www.espncricinfo.com/series/ipl-2025-1449924/live-cricket-score" title="IPL 2025 Live Score"></iframe>
+    <h1>Stump Mic Live IPL Score</h1>
+    <div id="scoreboard">
+        <div id="team1" class="team">
+            <span>Team 1</span>
+            <div id="score1" class="score">0/0</div>
+        </div>
+        <div id="team2" class="team">
+            <span>Team 2</span>
+            <div id="score2" class="score">0/0</div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchLiveScores() {
+            const url = "https://example.com/ipl-live-scores"; // Replace with actual API URL or endpoint
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // Update the scores from the API response
+                document.getElementById('team1').innerHTML = `<span>${data.team1.name}</span>`;
+                document.getElementById('score1').innerText = `${data.team1.score}`;
+                document.getElementById('team2').innerHTML = `<span>${data.team2.name}</span>`;
+                document.getElementById('score2').innerText = `${data.team2.score}`;
+            } catch (error) {
+                console.error("Error fetching scores:", error);
+            }
+        }
+
+        setInterval(fetchLiveScores, 60000); // Fetch scores every minute
+        fetchLiveScores(); // Initial fetch on page load
+    </script>
 </body>
 </html>

@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live IPL Score</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f8f9fa;
-        }
-        .score-widget {
-            width: 400px;
-            height: 300px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-        }
-    </style>
+    <title>Stump Mic IPL Live Score</title>
 </head>
 <body>
-    <div class="score-widget">
-        <h2 style="text-align: center;">Live IPL Score</h2>
-        <!-- CricketData.org free live match widget -->
-        <script src="https://cdorgapi.b-cdn.net/widgets/vmatchlist.js"></script>
+    <h1>Stump Mic IPL Live Score</h1>
+    <div id="score-container">
+        <p id="score">Fetching live score...</p>
     </div>
+    
+    <script>
+        // Replace this URL with your live API URL
+        const apiUrl = 'https://api.cricapi.com/v1/cricket?apikey=your-api-key';
+
+        // Fetch live score data
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Assuming the API provides score under data.score
+                const score = data.score || 'No live match currently.';
+                document.getElementById('score').textContent = score;
+            })
+            .catch(error => {
+                console.error('Error fetching live score:', error);
+                document.getElementById('score').textContent = 'Error fetching live score.';
+            });
+    </script>
 </body>
 </html>

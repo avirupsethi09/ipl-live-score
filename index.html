@@ -3,59 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stump Mic Live IPL Score</title>
+    <title>Live IPL Score</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #282c34;
-            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
         }
-        #scoreboard {
-            margin-top: 20px;
-        }
-        .team {
-            font-size: 24px;
-            margin: 10px;
-        }
-        .score {
-            font-size: 40px;
-            font-weight: bold;
+        .score-widget {
+            width: 400px;
+            height: 300px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
-    <h1>Stump Mic Live IPL Score</h1>
-    <div id="scoreboard">
-        <div id="team1" class="team">
-            <span>Team 1</span>
-            <div id="score1" class="score">0/0</div>
-        </div>
-        <div id="team2" class="team">
-            <span>Team 2</span>
-            <div id="score2" class="score">0/0</div>
-        </div>
+    <div class="score-widget">
+        <h2 style="text-align: center;">Live IPL Score</h2>
+        <!-- CricketData.org free live match widget -->
+        <script src="https://cdorgapi.b-cdn.net/widgets/vmatchlist.js"></script>
     </div>
-
-    <script>
-        async function fetchLiveScores() {
-            const url = "https://example.com/ipl-live-scores"; // Replace with actual API URL or endpoint
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                // Update the scores from the API response
-                document.getElementById('team1').innerHTML = `<span>${data.team1.name}</span>`;
-                document.getElementById('score1').innerText = `${data.team1.score}`;
-                document.getElementById('team2').innerHTML = `<span>${data.team2.name}</span>`;
-                document.getElementById('score2').innerText = `${data.team2.score}`;
-            } catch (error) {
-                console.error("Error fetching scores:", error);
-            }
-        }
-
-        setInterval(fetchLiveScores, 60000); // Fetch scores every minute
-        fetchLiveScores(); // Initial fetch on page load
-    </script>
 </body>
 </html>
